@@ -22,3 +22,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}

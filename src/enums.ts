@@ -27,3 +27,12 @@ export enum DepartmentsLabel {
     SUPPORT = "Техподдержка",
     ANALYTICS = "Аналитика",
 }
+
+export enum TabLabel {
+    ALL = "Все",
+    DESIGN = "Designers",
+    ANALYTICS = "Analytics",
+    MANAGEMENT = "Managers",
+    IOS = "iOS",
+    ANDROID = "Android",
+}

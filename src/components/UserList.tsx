@@ -10,7 +10,11 @@ const Wrapper = styled.div`
 `;
 
 interface UserListProps {
-  users: User[];
+  users: User[] | undefined;
+  isLoading: boolean;
+  isFetching: boolean;
+  isError: boolean;
+  isSuccess: boolean;
 }
 
 export const UserListSkeleton = () => {
@@ -23,7 +27,25 @@ export const UserListSkeleton = () => {
   );
 };
 
-export const UserList: FC<UserListProps> = ({ users }) => {
+export const UserList: FC<UserListProps> = ({
+  users,
+  isLoading,
+  isFetching,
+  isError,
+  isSuccess,
+}) => {
+  if (isLoading || isFetching) {
+    return <UserListSkeleton />;
+  }
+
+  if (isError) {
+    return <div>Ошибка при загрузке данных</div>;
+  }
+
+  if ((isSuccess && !users?.length) || !Array.isArray(users)) {
+    return <div>Нет данных</div>;
+  }
+
   return (
     <Wrapper>
       {users.map((user) => (

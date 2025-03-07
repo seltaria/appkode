@@ -1,24 +1,24 @@
+import { useState } from "react";
 import { useGetUserListQuery } from "../app/userApi";
-import { UserList, UserListSkeleton } from "../components";
+import { Tabs, UserList } from "../components";
 
 export const Main = () => {
-  const { data, isLoading, isSuccess, isError } = useGetUserListQuery();
-
-  if (isLoading) {
-    return <UserListSkeleton />;
-  }
-
-  if (isError) {
-    return <div>Ошибка при загрузке данных</div>;
-  }
-
-  if ((isSuccess && !data.length) || !Array.isArray(data)) {
-    return <div>Нет данных</div>;
-  }
+  const [activeTab, setActiveTab] = useState("all");
+  const { data, isLoading, isFetching, isSuccess, isError } =
+    useGetUserListQuery(activeTab);
 
   return (
     <div>
-      <UserList users={data} />
+      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+      <UserList
+        users={data?.filter(
+          (user) => activeTab === "all" || user.department === activeTab
+        )}
+        isLoading={isLoading}
+        isFetching={isFetching}
+        isError={isError}
+        isSuccess={isSuccess}
+      />
     </div>
   );
 };

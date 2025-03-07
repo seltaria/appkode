@@ -1,4 +1,4 @@
-import { DepartmentsLabel, DepartmentsValue } from "./enums";
+import { DepartmentsLabel, DepartmentsValue, TabLabel } from "./enums";
 
 export const departments: Record<DepartmentsValue, DepartmentsLabel> = {
     [DepartmentsValue.ANDROID]: DepartmentsLabel.ANDROID,
@@ -13,4 +13,13 @@ export const departments: Record<DepartmentsValue, DepartmentsLabel> = {
     [DepartmentsValue.BACKEND]: DepartmentsLabel.BACKEND,
     [DepartmentsValue.SUPPORT]: DepartmentsLabel.SUPPORT,
     [DepartmentsValue.ANALYTICS]: DepartmentsLabel.ANALYTICS,
+}
+
+export const TabFilters = {
+    all: TabLabel.ALL,
+    [DepartmentsValue.DESIGN]: TabLabel.DESIGN,
+    [DepartmentsValue.ANALYTICS]: TabLabel.ANALYTICS,
+    [DepartmentsValue.MANAGEMENT]: TabLabel.MANAGEMENT,
+    [DepartmentsValue.IOS]: TabLabel.IOS,
+    [DepartmentsValue.ANDROID]: TabLabel.ANDROID,
 }
