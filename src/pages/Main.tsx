@@ -1,10 +1,11 @@
 import { useGetUserListQuery } from "../app/userApi";
+import { UserList, UserListSkeleton } from "../components";
 
 export const Main = () => {
   const { data, isLoading, isSuccess, isError } = useGetUserListQuery();
 
   if (isLoading) {
-    return <div>Загрузка...</div>;
+    return <UserListSkeleton />;
   }
 
   if (isError) {
@@ -17,16 +18,7 @@ export const Main = () => {
 
   return (
     <div>
-      {data.map((el) => (
-        <div key={el.id}>
-          <img src={el.avatarUrl} alt={el.userTag} />
-          <div>
-            {el.firstName} {el.lastName}
-          </div>
-          <div>{el.userTag}</div>
-          <div>{el.department}</div>
-        </div>
-      ))}
+      <UserList users={data} />
     </div>
   );
 };

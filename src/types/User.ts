@@ -1,18 +1,9 @@
+import { DepartmentsValue } from "../enums";
+
 export type User = {
   avatarUrl: string;
   birthday: string;
-  department: "android" |
-  "ios" |
-  "design" |
-  "management" |
-  "qa" |
-  "back_office" |
-  "frontend" |
-  "hr" |
-  "pr" |
-  "backend" |
-  "support" |
-  "analytics";
+  department: DepartmentsValue;
   firstName: string;
   id: string;
   lastName: string;
