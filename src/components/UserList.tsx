@@ -3,6 +3,7 @@ import { UserCard, UserSkeleton } from "./UserCard";
 import { FC } from "react";
 import { User } from "../types/User";
 import { NoData } from "./NoData";
+import { useAppSelector } from "../app/hooks";
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,6 +36,8 @@ export const UserList: FC<UserListProps> = ({
   isError,
   isSuccess,
 }) => {
+  const sortParam = useAppSelector((state) => state.users.sort);
+
   if (isLoading || isFetching) {
     return <UserListSkeleton />;
   }
@@ -47,9 +50,22 @@ export const UserList: FC<UserListProps> = ({
     return <NoData />;
   }
 
+  const sortedUsers = [...users].sort((a, b) => {
+    if (sortParam === "name") {
+      return `${a.firstName} ${a.lastName}` > `${b.firstName} ${b.lastName}`
+        ? 1
+        : -1;
+    }
+    if (sortParam === "birthday") {
+      return new Date(a.birthday) > new Date(b.birthday) ? 1 : -1;
+    }
+
+    return 0;
+  });
+
   return (
     <Wrapper>
-      {users.map((user) => (
+      {sortedUsers.map((user) => (
         <UserCard
           key={user.id}
           name={user.firstName}

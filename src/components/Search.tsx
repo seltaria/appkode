@@ -2,6 +2,7 @@ import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { useDebounce } from "../app/hooks";
 import { SearchIcon, SortIcon } from "./icons";
+import { SortModal } from "./SortModal";
 
 const StyledSearchIcon = styled.div<{ $active?: boolean }>`
   position: absolute;
@@ -53,15 +54,14 @@ interface SearchProps {
 
 export const Search: FC<SearchProps> = ({ setInputText }) => {
   const [text, setText] = useState("");
+  const [isSortModal, setIsSortModal] = useState(false);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
 
   useDebounce(() => setInputText(text), 300);
 
-  // TODO: реализовать сортировку
-  const showSortModal = () => {};
-
+  const showSortModal = () => setIsSortModal(true);
   return (
     <Wrapper>
       <StyledSearchIcon $active={!!text}>
@@ -75,6 +75,7 @@ export const Search: FC<SearchProps> = ({ setInputText }) => {
       <SortButton onClick={showSortModal}>
         <SortIcon />
       </SortButton>
+      {isSortModal && <SortModal setIsSortModal={setIsSortModal} />}
     </Wrapper>
   );
 };
