@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { UserCard, UserSkeleton } from "./UserCard";
 import { FC } from "react";
 import { User } from "../types/User";
+import { NoData } from "./NoData";
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ export const UserList: FC<UserListProps> = ({
   }
 
   if ((isSuccess && !users?.length) || !Array.isArray(users)) {
-    return <div>Нет данных</div>;
+    return <NoData />;
   }
 
   return (
