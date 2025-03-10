@@ -20,7 +20,7 @@ const BlackString = styled.div`
 `;
 
 const GrayString = styled.div`
-  color: #97979b;
+  color: ${(props) => props.theme.lightGray};
 `;
 
 export const NoData = () => {

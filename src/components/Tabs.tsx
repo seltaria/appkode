@@ -11,15 +11,18 @@ const Tab = styled.button<{ $active?: boolean }>`
   font-weight: ${(props) => (props.$active ? "600" : "500")};
   font-size: 15px;
   line-height: 20px;
-  color: ${(props) => (props.$active ? "#050510" : "#97979b")};
+  color: ${(props) =>
+    props.$active ? props.theme.black : props.theme.lightGray};
   border-bottom: ${(props) =>
-    props.$active ? "2px solid #6534FF" : "2px solid transparent"};
+    props.$active
+      ? `2px solid ${props.theme.accent}`
+      : "2px solid transparent"};
   transition-property: color, border;
   transition-duration: 0.25s;
   transition-timing-function: ease-in-out;
 
   &:hover {
-    color: #050510;
+    color: ${(props) => props.theme.black};
   }
 `;
 

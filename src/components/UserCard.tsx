@@ -55,13 +55,13 @@ const Tag = styled.div`
   font-size: 14px;
   line-height: 18px;
   font-weight: 500;
-  color: #97979b;
+  color: ${(props) => props.theme.lightGray};
 `;
 
 const Department = styled.div`
   font-size: 13px;
   line-height: 16px;
-  color: #55555c;
+  color: ${(props) => props.theme.darkGray};
 `;
 
 interface UserCardProps {

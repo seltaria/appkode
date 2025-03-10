@@ -9,7 +9,8 @@ const StyledSearchIcon = styled.div<{ $active?: boolean }>`
   top: 8px;
 
   & path {
-    fill: ${(props) => (props.$active ? "#050510" : "#c3c3c6")};
+    fill: ${(props) =>
+      props.$active ? props.theme.black : props.theme.placeholder};
   }
 `;
 
@@ -19,16 +20,16 @@ const Input = styled.input`
   font-size: 15px;
   line-height: 20px;
   border-radius: 16px;
-  color: #050510;
-  background-color: #f7f7f8;
-  caret-color: #6534ff;
+  color: ${(props) => props.theme.black};
+  background-color: ${(props) => props.theme.input};
+  caret-color: ${(props) => props.theme.accent};
 
   & svg path {
-    fill: #050510;
+    fill: ${(props) => props.theme.black};
   }
 
   &::placeholder {
-    color: #c3c3c6;
+    color: ${(props) => props.theme.placeholder};
   }
 
   &:focus-visible {
