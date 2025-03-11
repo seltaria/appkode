@@ -5,11 +5,40 @@ import { User } from "../types/User";
 import { NoData } from "./NoData";
 import { useAppSelector } from "../app/hooks";
 import { Error } from "./Error";
+import { formatDateToSort } from "../utils";
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+`;
+
+const Year = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  color: ${(props) => props.theme.placeholder};
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: calc(50% - 80px);
+    height: 1px;
+    background-color: ${(props) => props.theme.placeholder};
+  }
+
+  &::before {
+    left: 0;
+  }
+
+  &::after {
+    right: 0;
+  }
 `;
 
 interface UserListProps {
@@ -60,17 +89,38 @@ export const UserList: FC<UserListProps> = ({
         : -1;
     }
     if (sortParam === "birthday") {
-      return new Date(a.birthday) > new Date(b.birthday) ? 1 : -1;
+      return formatDateToSort(a.birthday) > formatDateToSort(b.birthday)
+        ? 1
+        : -1;
     }
 
     return 0;
   });
 
-  return (
-    <Wrapper>
-      {sortedUsers.map((user) => (
-        <UserCard key={user.id} {...user} />
-      ))}
-    </Wrapper>
-  );
+  const today = formatDateToSort(new Date());
+
+  const userElements =
+    sortParam === "birthday" ? (
+      <>
+        {sortedUsers
+          .filter((user) => formatDateToSort(user.birthday) > today)
+          .map((user) => (
+            <UserCard key={user.id} {...user} />
+          ))}
+        <Year>2026</Year>
+        {sortedUsers
+          .filter((user) => formatDateToSort(user.birthday) < today)
+          .map((user) => (
+            <UserCard key={user.id} {...user} />
+          ))}
+      </>
+    ) : (
+      <>
+        {sortedUsers.map((user) => (
+          <UserCard key={user.id} {...user} />
+        ))}
+      </>
+    );
+
+  return <Wrapper>{userElements}</Wrapper>;
 };

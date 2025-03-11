@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { User } from "../types/User";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { saveCurrentUser } from "../app/slices/userSlice";
-import { formatDate } from "../utils";
+import { formatDateToShow } from "../utils";
 
 const Wrapper = styled.div<{ $skeleton?: boolean }>`
   display: flex;
@@ -119,7 +119,9 @@ export const UserCard: FC<User> = (user) => {
           </NameWrapper>
           <Department>{departments[department]}</Department>
         </Info>
-        {isSortedByDay && <Birthday>{formatDate(birthday, true)}</Birthday>}
+        {isSortedByDay && (
+          <Birthday>{formatDateToShow(birthday, true)}</Birthday>
+        )}
       </Wrapper>
     </Link>
   );

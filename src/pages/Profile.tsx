@@ -4,7 +4,7 @@ import { BackIcon, Error, FavoriteIcon, PhoneIcon } from "../components";
 import { NoData } from "../components/NoData";
 import styled from "styled-components";
 import { departments } from "../constants";
-import { getUserAge, formatPhoneNumber, formatDate } from "../utils";
+import { getUserAge, formatPhoneNumber, formatDateToShow } from "../utils";
 import { useMemo } from "react";
 
 const Wrapper = styled.div`
@@ -157,7 +157,7 @@ export const Profile = () => {
             <Dates>
               <Info>
                 <FavoriteIcon />
-                {formatDate(currentUser.birthday)}
+                {formatDateToShow(currentUser.birthday)}
               </Info>
               <Age>{getUserAge(currentUser.birthday)}</Age>
             </Dates>
