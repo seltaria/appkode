@@ -1,13 +1,23 @@
 import { FC } from "react";
 import styled from "styled-components";
 import { departments } from "../constants";
-import { DepartmentsValue } from "../enums";
+import { Link } from "react-router";
+import { User } from "../types/User";
+import { useAppDispatch } from "../app/hooks";
+import { saveCurrentUser } from "../app/slices/userSlice";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ $skeleton?: boolean }>`
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 6px 0;
+  border-radius: 10px;
+  transition: background-color ease-in-out 0.2s;
+  pointer-events: ${(props) => (props.$skeleton ? "none" : "unset")};
+
+  &:hover {
+    background-color: ${(props) => props.theme.input};
+  }
 `;
 
 const Info = styled.div`
@@ -64,17 +74,9 @@ const Department = styled.div`
   color: ${(props) => props.theme.darkGray};
 `;
 
-interface UserCardProps {
-  name: string;
-  surname: string;
-  tag: string;
-  avatarSrc: string;
-  department: DepartmentsValue;
-}
-
 export const UserSkeleton = () => {
   return (
-    <Wrapper>
+    <Wrapper $skeleton>
       <Avatar $skeleton />
       <Info>
         <NameSkeleton />
@@ -84,25 +86,27 @@ export const UserSkeleton = () => {
   );
 };
 
-export const UserCard: FC<UserCardProps> = ({
-  name,
-  surname,
-  tag,
-  avatarSrc,
-  department,
-}) => {
+export const UserCard: FC<User> = (user) => {
+  const { id, firstName, lastName, userTag, avatarUrl, department } = user;
+
+  const dispatch = useAppDispatch();
+
+  const handleClick = () => dispatch(saveCurrentUser(user));
+
   return (
-    <Wrapper>
-      <Avatar as="img" src={avatarSrc} alt={tag} />
-      <Info>
-        <NameWrapper>
-          <Name>
-            {name} {surname}
-          </Name>
-          <Tag>{tag}</Tag>
-        </NameWrapper>
-        <Department>{departments[department]}</Department>
-      </Info>
-    </Wrapper>
+    <Link to={`${id}`} onClick={handleClick}>
+      <Wrapper>
+        <Avatar as="img" src={avatarUrl} alt={userTag} />
+        <Info>
+          <NameWrapper>
+            <Name>
+              {firstName} {lastName}
+            </Name>
+            <Tag>{userTag}</Tag>
+          </NameWrapper>
+          <Department>{departments[department]}</Department>
+        </Info>
+      </Wrapper>
+    </Link>
   );
 };

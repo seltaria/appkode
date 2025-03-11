@@ -2,6 +2,11 @@ import { useState } from "react";
 import { useGetUserListQuery } from "../app/userApi";
 import { Search, Tabs, UserList } from "../components";
 import { User } from "../types/User";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  padding: 8px 16px;
+`;
 
 const searchUser = (
   userList: User[] | undefined,
@@ -24,7 +29,7 @@ export const Main = () => {
     useGetUserListQuery(activeTab);
 
   return (
-    <div>
+    <Wrapper>
       <Search setInputText={setInputText} />
       <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <UserList
@@ -39,6 +44,6 @@ export const Main = () => {
         isError={isError}
         isSuccess={isSuccess}
       />
-    </div>
+    </Wrapper>
   );
 };

@@ -66,14 +66,7 @@ export const UserList: FC<UserListProps> = ({
   return (
     <Wrapper>
       {sortedUsers.map((user) => (
-        <UserCard
-          key={user.id}
-          name={user.firstName}
-          surname={user.lastName}
-          avatarSrc={user.avatarUrl}
-          department={user.department}
-          tag={user.userTag}
-        />
+        <UserCard key={user.id} {...user} />
       ))}
     </Wrapper>
   );

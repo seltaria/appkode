@@ -15,7 +15,7 @@ export const departments: Record<DepartmentsValue, DepartmentsLabel> = {
     [DepartmentsValue.ANALYTICS]: DepartmentsLabel.ANALYTICS,
 }
 
-export const TabFilters = {
+export const TabFilters = { // TODO: rename
     all: TabLabel.ALL,
     [DepartmentsValue.DESIGN]: TabLabel.DESIGN,
     [DepartmentsValue.ANALYTICS]: TabLabel.ANALYTICS,
@@ -23,3 +23,5 @@ export const TabFilters = {
     [DepartmentsValue.IOS]: TabLabel.IOS,
     [DepartmentsValue.ANDROID]: TabLabel.ANDROID,
 }
+
+export const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
