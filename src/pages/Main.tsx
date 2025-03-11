@@ -25,8 +25,8 @@ export const Main = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [inputText, setInputText] = useState("");
 
-  const { data, isLoading, isFetching, isSuccess, isError } =
-    useGetUserListQuery(activeTab);
+  const { data, isLoading, isFetching, refetch, isSuccess, isError } =
+    useGetUserListQuery({ department: activeTab });
 
   return (
     <Wrapper>
@@ -43,6 +43,7 @@ export const Main = () => {
         isFetching={isFetching}
         isError={isError}
         isSuccess={isSuccess}
+        refetch={refetch}
       />
     </Wrapper>
   );

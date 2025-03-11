@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router";
 import { useGetUserListQuery } from "../app/userApi";
-import { BackIcon, FavoriteIcon, PhoneIcon } from "../components";
+import { BackIcon, Error, FavoriteIcon, PhoneIcon } from "../components";
 import { NoData } from "../components/NoData";
 import styled from "styled-components";
 import { departments } from "../constants";
@@ -116,7 +116,9 @@ const ProfileSkeleton = () => {
 export const Profile = () => {
   const { id } = useParams();
 
-  const { data, isLoading, isSuccess, isError } = useGetUserListQuery("all");
+  const { data, isLoading, isSuccess, isError, refetch } = useGetUserListQuery({
+    department: "all",
+  });
 
   const currentUser = useMemo(
     () => Array.isArray(data) && data.find((user) => user.id === id),
@@ -133,13 +135,11 @@ export const Profile = () => {
 
       {isLoading && <ProfileSkeleton />}
 
-      {isError && <div>Ошибка при загрузке данных</div>}
+      {isError && <Error refetch={refetch} />}
 
       {isSuccess && (!Array.isArray(data) || !data?.length) && <NoData />}
 
-      {isSuccess && !currentUser && (
-        <div>Такого пользователя не существует</div>
-      )}
+      {isSuccess && !currentUser && <NoData />}
 
       {isSuccess && currentUser && (
         <>

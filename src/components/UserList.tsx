@@ -4,6 +4,7 @@ import { FC } from "react";
 import { User } from "../types/User";
 import { NoData } from "./NoData";
 import { useAppSelector } from "../app/hooks";
+import { Error } from "./Error";
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,6 +18,7 @@ interface UserListProps {
   isFetching: boolean;
   isError: boolean;
   isSuccess: boolean;
+  refetch: () => void;
 }
 
 export const UserListSkeleton = () => {
@@ -35,6 +37,7 @@ export const UserList: FC<UserListProps> = ({
   isFetching,
   isError,
   isSuccess,
+  refetch,
 }) => {
   const sortParam = useAppSelector((state) => state.users.sort);
 
@@ -43,7 +46,7 @@ export const UserList: FC<UserListProps> = ({
   }
 
   if (isError) {
-    return <div>Ошибка при загрузке данных</div>;
+    return <Error refetch={refetch} />;
   }
 
   if ((isSuccess && !users?.length) || !Array.isArray(users)) {
