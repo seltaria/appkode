@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { departments } from "../constants";
 import { Link } from "react-router";
 import { User } from "../types/User";
-import { useAppDispatch } from "../app/hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { saveCurrentUser } from "../app/slices/userSlice";
+import { formatDate } from "../utils";
 
 const Wrapper = styled.div<{ $skeleton?: boolean }>`
   display: flex;
@@ -74,6 +75,14 @@ const Department = styled.div`
   color: ${(props) => props.theme.darkGray};
 `;
 
+const Birthday = styled.div`
+  padding-right: 5px;
+  margin-left: auto;
+  font-size: 15px;
+  line-height: 20px;
+  color: ${(props) => props.theme.darkGray};
+`;
+
 export const UserSkeleton = () => {
   return (
     <Wrapper $skeleton>
@@ -87,9 +96,13 @@ export const UserSkeleton = () => {
 };
 
 export const UserCard: FC<User> = (user) => {
-  const { id, firstName, lastName, userTag, avatarUrl, department } = user;
+  const { id, firstName, lastName, userTag, avatarUrl, department, birthday } =
+    user;
 
   const dispatch = useAppDispatch();
+  const isSortedByDay = useAppSelector(
+    (state) => state.users.sort === "birthday"
+  );
 
   const handleClick = () => dispatch(saveCurrentUser(user));
 
@@ -106,6 +119,7 @@ export const UserCard: FC<User> = (user) => {
           </NameWrapper>
           <Department>{departments[department]}</Department>
         </Info>
+        {isSortedByDay && <Birthday>{formatDate(birthday, true)}</Birthday>}
       </Wrapper>
     </Link>
   );

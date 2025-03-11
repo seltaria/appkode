@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react";
 import styled from "styled-components";
-import { useDebounce } from "../app/hooks";
+import { useAppSelector, useDebounce } from "../app/hooks";
 import { SearchIcon, SortIcon } from "./icons";
 import { SortModal } from "./SortModal";
 
@@ -42,10 +42,15 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const SortButton = styled.button`
+const SortButton = styled.button<{ $filtered?: boolean }>`
   position: absolute;
   right: 12px;
   top: 8px;
+
+  & path {
+    fill: ${(props) =>
+      props.$filtered ? props.theme.accent : props.theme.lightGray};
+  }
 `;
 
 interface SearchProps {
@@ -61,6 +66,8 @@ export const Search: FC<SearchProps> = ({ setInputText }) => {
 
   useDebounce(() => setInputText(text), 300);
 
+  const isFiltered = useAppSelector((state) => !!state.users.sort);
+
   const showSortModal = () => setIsSortModal(true);
   return (
     <Wrapper>
@@ -72,7 +79,7 @@ export const Search: FC<SearchProps> = ({ setInputText }) => {
         placeholder="Введи имя, фамилию или никнейм"
         value={text}
       />
-      <SortButton onClick={showSortModal}>
+      <SortButton onClick={showSortModal} $filtered={isFiltered}>
         <SortIcon />
       </SortButton>
       {isSortModal && <SortModal setIsSortModal={setIsSortModal} />}
