@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { sort } from "../app/slices/userSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { CloseIcon } from "./icons";
+import { TRANSITION_DURATION } from "../constants";
 
 const Modal = styled.div`
   position: absolute;
@@ -35,9 +36,18 @@ const CloseButton = styled.button`
   height: 24px;
   border-radius: 12px;
   background-color: ${(props) => props.theme.buttonBg};
+
+  & path {
+    transition: fill ease-in-out ${TRANSITION_DURATION};
+  }
+
+  &:hover path {
+    fill: ${(props) => props.theme.darkGray};
+  }
 `;
 
 const Title = styled.h2`
+  margin: 8px 0 36px;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
@@ -60,7 +70,14 @@ const OptionList = styled.div`
 
 const Option = styled.div`
   display: flex;
+  align-items: center;
   gap: 14px;
+  cursor: pointer;
+  transition: opacity ease-in-out ${TRANSITION_DURATION};
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 interface SortModalProps {

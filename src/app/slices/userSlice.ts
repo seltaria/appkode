@@ -15,7 +15,11 @@ const userSlice = createSlice({
             state.search = action.payload;
         },
         sort: (state, action: PayloadAction<string | null>) => {
-            state.sort = action.payload;
+            if (state.sort === action.payload) {
+                state.sort = null;
+            } else {
+                state.sort = action.payload;
+            }
         },
         // TODO: check
         saveCurrentUser: (state, action: PayloadAction<User | null>) => {

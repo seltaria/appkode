@@ -3,7 +3,7 @@ import { useGetUserListQuery } from "../app/userApi";
 import { BackIcon, Error, FavoriteIcon, PhoneIcon } from "../components";
 import { NoData } from "../components/NoData";
 import styled from "styled-components";
-import { departments } from "../constants";
+import { departments, TRANSITION_DURATION } from "../constants";
 import { getUserAge, formatPhoneNumber, formatDateToShow } from "../utils";
 import { useMemo } from "react";
 
@@ -24,6 +24,11 @@ const BackLink = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity ease-in-out ${TRANSITION_DURATION};
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 const Avatar = styled.img<{ $skeleton?: boolean }>`

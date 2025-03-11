@@ -3,15 +3,15 @@ import styled from "styled-components";
 import { useAppSelector, useDebounce } from "../app/hooks";
 import { SearchIcon, SortIcon } from "./icons";
 import { SortModal } from "./SortModal";
+import { TRANSITION_DURATION } from "../constants";
 
-const StyledSearchIcon = styled.div<{ $active?: boolean }>`
+const StyledSearchIcon = styled.div`
   position: absolute;
   left: 12px;
   top: 8px;
 
   & path {
-    fill: ${(props) =>
-      props.$active ? props.theme.black : props.theme.placeholder};
+    transition: fill ease-in-out ${TRANSITION_DURATION};
   }
 `;
 
@@ -36,6 +36,12 @@ const Input = styled.input`
   &:focus-visible {
     outline: none;
   }
+
+  &:focus ~ ${StyledSearchIcon} {
+    & path {
+      fill: ${(props) => props.theme.black};
+    }
+  }
 `;
 
 const Wrapper = styled.div`
@@ -46,6 +52,11 @@ const SortButton = styled.button<{ $filtered?: boolean }>`
   position: absolute;
   right: 12px;
   top: 8px;
+  transition: opacity ease-in-out ${TRANSITION_DURATION};
+
+  &:hover {
+    opacity: 0.7;
+  }
 
   & path {
     fill: ${(props) =>
@@ -71,14 +82,14 @@ export const Search: FC<SearchProps> = ({ setInputText }) => {
   const showSortModal = () => setIsSortModal(true);
   return (
     <Wrapper>
-      <StyledSearchIcon $active={!!text}>
-        <SearchIcon />
-      </StyledSearchIcon>
       <Input
         onChange={handleChange}
         placeholder="Введи имя, фамилию или никнейм"
         value={text}
       />
+      <StyledSearchIcon>
+        <SearchIcon />
+      </StyledSearchIcon>
       <SortButton onClick={showSortModal} $filtered={isFiltered}>
         <SortIcon />
       </SortButton>

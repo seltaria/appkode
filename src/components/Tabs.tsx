@@ -1,9 +1,20 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import styled from "styled-components";
-import { TabFilters } from "../constants";
+import { TabFilters, TRANSITION_DURATION } from "../constants";
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: -16px;
+    right: -16px;
+    bottom: 0;
+    height: 1px;
+    background-color: ${(props) => props.theme.placeholder};
+  }
 `;
 
 const Tab = styled.button<{ $active?: boolean }>`
@@ -18,7 +29,7 @@ const Tab = styled.button<{ $active?: boolean }>`
       ? `2px solid ${props.theme.accent}`
       : "2px solid transparent"};
   transition-property: color, border;
-  transition-duration: 0.25s;
+  transition-duration: ${TRANSITION_DURATION};
   transition-timing-function: ease-in-out;
 
   &:hover {

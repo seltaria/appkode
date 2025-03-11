@@ -5,7 +5,23 @@ import { User } from "../types/User";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const Title = styled.h1`
+  margin: 0 0 6px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28px;
 `;
 
 const searchUser = (
@@ -30,21 +46,24 @@ export const Main = () => {
 
   return (
     <Wrapper>
+      <Title>Поиск</Title>
       <Search setInputText={setInputText} />
-      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-      <UserList
-        users={searchUser(
-          data?.filter(
-            (user) => activeTab === "all" || user.department === activeTab
-          ),
-          inputText
-        )}
-        isLoading={isLoading}
-        isFetching={isFetching}
-        isError={isError}
-        isSuccess={isSuccess}
-        refetch={refetch}
-      />
+      <ContentWrapper>
+        <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        <UserList
+          users={searchUser(
+            data?.filter(
+              (user) => activeTab === "all" || user.department === activeTab
+            ),
+            inputText
+          )}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          isError={isError}
+          isSuccess={isSuccess}
+          refetch={refetch}
+        />
+      </ContentWrapper>
     </Wrapper>
   );
 };

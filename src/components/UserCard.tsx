@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { departments } from "../constants";
+import { departments, TRANSITION_DURATION } from "../constants";
 import { Link } from "react-router";
 import { User } from "../types/User";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
@@ -13,7 +13,7 @@ const Wrapper = styled.div<{ $skeleton?: boolean }>`
   gap: 16px;
   padding: 6px 0;
   border-radius: 10px;
-  transition: background-color ease-in-out 0.2s;
+  transition: background-color ease-in-out ${TRANSITION_DURATION};
   pointer-events: ${(props) => (props.$skeleton ? "none" : "unset")};
 
   &:hover {
