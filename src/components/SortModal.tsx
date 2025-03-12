@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { CloseIcon } from "./icons";
 import { TRANSITION_DURATION } from "../constants";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
 
 const Modal = styled.div`
   position: absolute;
@@ -97,6 +98,7 @@ export const SortModal: FC<SortModalProps> = ({ setIsSortModal }) => {
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) =>
@@ -117,9 +119,19 @@ export const SortModal: FC<SortModalProps> = ({ setIsSortModal }) => {
 
   const chooseSortParam = (param: string) => {
     dispatch(sort(param));
+    setSearchParams((params) => {
+      if (params.get("sort") === param) {
+        params.set("sort", "");
+      } else {
+        params.set("sort", param);
+      }
+
+      return params;
+    });
   };
 
-  const sortParam = useAppSelector((state) => state.users.sort);
+  const sortParam =
+    useAppSelector((state) => state.users.sort) || searchParams.get("sort");
 
   return createPortal(
     <Modal onClick={closeModal}>

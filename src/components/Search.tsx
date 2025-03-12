@@ -5,6 +5,7 @@ import { SearchIcon, SortIcon } from "./icons";
 import { SortModal } from "./SortModal";
 import { TRANSITION_DURATION } from "../constants";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
 
 const StyledSearchIcon = styled.div`
   position: absolute;
@@ -71,15 +72,24 @@ interface SearchProps {
 
 export const Search: FC<SearchProps> = ({ setInputText }) => {
   const { t } = useTranslation();
-  const [text, setText] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [text, setText] = useState(searchParams.get("search") || "");
   const [isSortModal, setIsSortModal] = useState(false);
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
   };
 
-  useDebounce(() => setInputText(text), 300);
+  useDebounce(() => {
+    setInputText(text);
+    setSearchParams((params) => {
+      params.set("search", text);
+      return params;
+    });
+  }, 300);
 
-  const isFiltered = useAppSelector((state) => !!state.users.sort);
+  const isFiltered =
+    useAppSelector((state) => !!state.users.sort) || !!searchParams.get("sort");
 
   const showSortModal = () => setIsSortModal(true);
   return (

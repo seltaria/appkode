@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useGetUserListQuery } from "../app/userApi";
 import { Error } from "../components";
 import { BackIcon, FavoriteIcon, PhoneIcon } from "../components/icons";
@@ -125,6 +125,7 @@ const ProfileSkeleton = () => {
 export const Profile = () => {
   const { id } = useParams();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const { data, isLoading, isSuccess, isError, refetch } = useGetUserListQuery({
     department: "all",
@@ -135,12 +136,12 @@ export const Profile = () => {
     [data, id]
   );
 
+  const goBack = () => navigate(-1);
+
   return (
     <>
-      <BackLink>
-        <Link to="/">
-          <BackIcon />
-        </Link>
+      <BackLink onClick={goBack}>
+        <BackIcon />
       </BackLink>
 
       {isLoading && <ProfileSkeleton />}

@@ -3,6 +3,7 @@ import { useGetUserListQuery } from "../app/userApi";
 import { Header, Search, Tabs, UserList } from "../components";
 import { User } from "../types/User";
 import styled from "styled-components";
+import { useSearchParams } from "react-router";
 
 const Wrapper = styled.div`
   display: flex;
@@ -31,8 +32,9 @@ const searchUser = (
 };
 
 export const Main = () => {
-  const [activeTab, setActiveTab] = useState("all");
-  const [inputText, setInputText] = useState("");
+  const [searchParams] = useSearchParams();
+  const [activeTab, setActiveTab] = useState(searchParams.get("tab") || "all");
+  const [inputText, setInputText] = useState(searchParams.get("search") || "");
 
   const { data, isLoading, isFetching, refetch, isSuccess, isError } =
     useGetUserListQuery({ department: activeTab });

@@ -6,6 +6,7 @@ import { NoData } from "./NoData";
 import { useAppSelector } from "../app/hooks";
 import { Error } from "./Error";
 import { formatDateToSort } from "../utils";
+import { useSearchParams } from "react-router";
 
 const Wrapper = styled.div`
   display: flex;
@@ -68,7 +69,9 @@ export const UserList: FC<UserListProps> = ({
   isSuccess,
   refetch,
 }) => {
-  const sortParam = useAppSelector((state) => state.users.sort);
+  const [searchParams] = useSearchParams();
+  const sortParam =
+    useAppSelector((state) => state.users.sort) || searchParams.get("sort");
 
   if (isLoading || isFetching) {
     return <UserListSkeleton />;

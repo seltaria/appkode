@@ -2,6 +2,7 @@ import { Dispatch, FC, SetStateAction } from "react";
 import styled from "styled-components";
 import { tabFilters, TRANSITION_DURATION } from "../constants";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router";
 
 const Wrapper = styled.div`
   position: relative;
@@ -45,9 +46,14 @@ interface TabsProps {
 
 export const Tabs: FC<TabsProps> = ({ activeTab, setActiveTab }) => {
   const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClick = (tab: string) => {
     setActiveTab(tab);
+    setSearchParams((params) => {
+      params.set("tab", tab);
+      return params;
+    });
   };
 
   return (
@@ -56,7 +62,7 @@ export const Tabs: FC<TabsProps> = ({ activeTab, setActiveTab }) => {
         <Tab
           key={value}
           onClick={() => handleClick(value)}
-          $active={activeTab === value}
+          $active={activeTab === value || searchParams.get("tab") === value}
         >
           {t(label)}
         </Tab>
