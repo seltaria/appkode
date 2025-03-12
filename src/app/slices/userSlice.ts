@@ -1,10 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../types/User";
+import { getSavedThemeFromLS } from "../../utils";
 
-const initialState: {search: string, sort: string | null, currentUser: User | null} = {
+interface State {
+    search: string;
+    sort: string | null;
+    theme: string;
+}
+
+const initialState: State = {
     search: "",
     sort: null,
-    currentUser: null,
+    theme: getSavedThemeFromLS(),
 };
 
 const userSlice = createSlice({
@@ -21,9 +27,8 @@ const userSlice = createSlice({
                 state.sort = action.payload;
             }
         },
-        // TODO: check
-        saveCurrentUser: (state, action: PayloadAction<User | null>) => {
-            state.currentUser = action.payload;
+        setTheme: (state, action: PayloadAction<string>) => {
+            state.theme = action.payload;
         }
     },
 });
@@ -31,6 +36,6 @@ const userSlice = createSlice({
 export const {
     search,
     sort,
-    saveCurrentUser,
+    setTheme
 } = userSlice.actions;
 export {userSlice};

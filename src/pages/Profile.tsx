@@ -38,7 +38,7 @@ const Avatar = styled.img<{ $skeleton?: boolean }>`
   border-radius: 52px;
   background: ${(props) =>
     props.$skeleton
-      ? "linear-gradient(90deg, #f3f3f6 0%, #fafafa 100%)"
+      ? `linear-gradient(90deg, ${props.theme.firstGradient} 0%, ${props.theme.secondGradient} 100%)`
       : "unset"};
   box-shadow: 0px 8px 12px 0px #161e3414;
 `;
@@ -55,7 +55,8 @@ const NameSkeleton = styled.div`
   height: 28px;
   margin-bottom: 12px;
   border-radius: 50px;
-  background: linear-gradient(90deg, #f3f3f6 0%, #fafafa 100%);
+  background: ${(props) =>
+    `linear-gradient(90deg, ${props.theme.firstGradient} 0%, ${props.theme.secondGradient} 100%)`};
 `;
 
 const NameWrapper = styled.div`
@@ -81,7 +82,8 @@ const DepartmentSkeleton = styled.div`
   width: 55px;
   height: 16px;
   border-radius: 50px;
-  background: linear-gradient(90deg, #f3f3f6 0%, #fafafa 100%);
+  background: ${(props) =>
+    `linear-gradient(90deg, ${props.theme.firstGradient} 0%, ${props.theme.secondGradient} 100%)`};
 `;
 
 const Age = styled.div`

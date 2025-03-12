@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   height: 192px;
   padding: 16px;
   border-radius: 20px;
+  color: ${(props) => props.theme.black};
   background-color: ${(props) => props.theme.white};
 `;
 
@@ -35,7 +36,7 @@ const CloseButton = styled.button`
   width: 24px;
   height: 24px;
   border-radius: 12px;
-  background-color: ${(props) => props.theme.buttonBg};
+  background-color: ${(props) => props.theme.input};
 
   & path {
     transition: fill ease-in-out ${TRANSITION_DURATION};

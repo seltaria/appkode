@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetUserListQuery } from "../app/userApi";
-import { Search, Tabs, UserList } from "../components";
+import { Search, Tabs, ThemeSwitcher, UserList } from "../components";
 import { User } from "../types/User";
 import styled from "styled-components";
 
@@ -64,6 +64,7 @@ export const Main = () => {
           refetch={refetch}
         />
       </ContentWrapper>
+      <ThemeSwitcher />
     </Wrapper>
   );
 };

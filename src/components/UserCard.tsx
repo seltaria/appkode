@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { departments, TRANSITION_DURATION } from "../constants";
 import { Link } from "react-router";
 import { User } from "../types/User";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { saveCurrentUser } from "../app/slices/userSlice";
+import { useAppSelector } from "../app/hooks";
 import { formatDateToShow } from "../utils";
 
 const Wrapper = styled.div<{ $skeleton?: boolean }>`
@@ -33,7 +32,7 @@ const Avatar = styled.div<{ $skeleton?: boolean }>`
   border-radius: 50px;
   background: ${(props) =>
     props.$skeleton
-      ? "linear-gradient(90deg, #f3f3f6 0%, #fafafa 100%)"
+      ? `linear-gradient(90deg, ${props.theme.firstGradient} 0%, ${props.theme.secondGradient} 100%)`
       : "none"};
 `;
 
@@ -41,14 +40,16 @@ const NameSkeleton = styled.div`
   width: 144px;
   height: 16px;
   border-radius: 50px;
-  background: linear-gradient(90deg, #f3f3f6 0%, #fafafa 100%);
+  background: ${(props) =>
+    `linear-gradient(90deg, ${props.theme.firstGradient} 0%, ${props.theme.secondGradient} 100%)`};
 `;
 
 const DepartmentSkeleton = styled.div`
   width: 80px;
   height: 12px;
   border-radius: 50px;
-  background: linear-gradient(90deg, #f3f3f6 0%, #fafafa 100%);
+  background: ${(props) =>
+    `linear-gradient(90deg, ${props.theme.firstGradient} 0%, ${props.theme.secondGradient} 100%)`};
 `;
 
 const Name = styled.div`
@@ -99,15 +100,12 @@ export const UserCard: FC<User> = (user) => {
   const { id, firstName, lastName, userTag, avatarUrl, department, birthday } =
     user;
 
-  const dispatch = useAppDispatch();
   const isSortedByDay = useAppSelector(
     (state) => state.users.sort === "birthday"
   );
 
-  const handleClick = () => dispatch(saveCurrentUser(user));
-
   return (
-    <Link to={`${id}`} onClick={handleClick}>
+    <Link to={`${id}`}>
       <Wrapper>
         <Avatar as="img" src={avatarUrl} alt={userTag} />
         <Info>

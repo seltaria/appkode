@@ -5,15 +5,14 @@ import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./app/router.tsx";
 import { store } from "./app/store.ts";
-import { ThemeProvider } from "styled-components";
-import { theme } from "./styles/theme.ts";
+import { App } from "./components/App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
+      <App>
         <RouterProvider router={router} />
-      </ThemeProvider>
+      </App>
     </Provider>
   </StrictMode>
 );
