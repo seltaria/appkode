@@ -5,6 +5,7 @@ import { sort } from "../app/slices/userSlice";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { CloseIcon } from "./icons";
 import { TRANSITION_DURATION } from "../constants";
+import { useTranslation } from "react-i18next";
 
 const Modal = styled.div`
   position: absolute;
@@ -95,6 +96,8 @@ export const SortModal: FC<SortModalProps> = ({ setIsSortModal }) => {
 
   const dispatch = useAppDispatch();
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) =>
       event.key === "Escape" ? closeModal() : null;
@@ -124,11 +127,11 @@ export const SortModal: FC<SortModalProps> = ({ setIsSortModal }) => {
         <CloseButton onClick={closeModal}>
           <CloseIcon />
         </CloseButton>
-        <Title>Сортировка</Title>
+        <Title>{t("Сортировка")}</Title>
         <OptionList>
           {sortParams.map((el) => (
             <Option onClick={() => chooseSortParam(el.value)} key={el.value}>
-              <Radio $active={sortParam === el.value} /> {el.label}
+              <Radio $active={sortParam === el.value} /> {t(el.label)}
             </Option>
           ))}
         </OptionList>

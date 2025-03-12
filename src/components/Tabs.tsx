@@ -1,6 +1,7 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import styled from "styled-components";
 import { TabFilters, TRANSITION_DURATION } from "../constants";
+import { useTranslation } from "react-i18next";
 
 const Wrapper = styled.div`
   position: relative;
@@ -43,6 +44,8 @@ interface TabsProps {
 }
 
 export const Tabs: FC<TabsProps> = ({ activeTab, setActiveTab }) => {
+  const { t } = useTranslation();
+
   const handleClick = (tab: string) => {
     setActiveTab(tab);
   };
@@ -55,7 +58,7 @@ export const Tabs: FC<TabsProps> = ({ activeTab, setActiveTab }) => {
           onClick={() => handleClick(value)}
           $active={activeTab === value}
         >
-          {label}
+          {t(label)}
         </Tab>
       ))}
     </Wrapper>

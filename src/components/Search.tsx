@@ -4,6 +4,7 @@ import { useAppSelector, useDebounce } from "../app/hooks";
 import { SearchIcon, SortIcon } from "./icons";
 import { SortModal } from "./SortModal";
 import { TRANSITION_DURATION } from "../constants";
+import { useTranslation } from "react-i18next";
 
 const StyledSearchIcon = styled.div`
   position: absolute;
@@ -69,6 +70,7 @@ interface SearchProps {
 }
 
 export const Search: FC<SearchProps> = ({ setInputText }) => {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
   const [isSortModal, setIsSortModal] = useState(false);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -84,7 +86,7 @@ export const Search: FC<SearchProps> = ({ setInputText }) => {
     <Wrapper>
       <Input
         onChange={handleChange}
-        placeholder="Введи имя, фамилию или никнейм"
+        placeholder={t("Введи имя, фамилию или никнейм")}
         value={text}
       />
       <StyledSearchIcon>

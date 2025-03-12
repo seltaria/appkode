@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetUserListQuery } from "../app/userApi";
-import { Search, Tabs, ThemeSwitcher, UserList } from "../components";
+import { Header, Search, Tabs, UserList } from "../components";
 import { User } from "../types/User";
 import styled from "styled-components";
 
@@ -15,13 +15,6 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
-
-const Title = styled.h1`
-  margin: 0 0 6px;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
 `;
 
 const searchUser = (
@@ -46,7 +39,7 @@ export const Main = () => {
 
   return (
     <Wrapper>
-      <Title>Поиск</Title>
+      <Header />
       <Search setInputText={setInputText} />
       <ContentWrapper>
         <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -64,7 +57,6 @@ export const Main = () => {
           refetch={refetch}
         />
       </ContentWrapper>
-      <ThemeSwitcher />
     </Wrapper>
   );
 };

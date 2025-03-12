@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { departments, TRANSITION_DURATION } from "../constants";
 import { getUserAge, formatPhoneNumber, formatDateToShow } from "../utils";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 const Wrapper = styled.div`
   display: flex;
@@ -122,6 +123,7 @@ const ProfileSkeleton = () => {
 
 export const Profile = () => {
   const { id } = useParams();
+  const { t } = useTranslation();
 
   const { data, isLoading, isSuccess, isError, refetch } = useGetUserListQuery({
     department: "all",
@@ -164,9 +166,9 @@ export const Profile = () => {
             <Dates>
               <Info>
                 <FavoriteIcon />
-                {formatDateToShow(currentUser.birthday)}
+                {formatDateToShow(currentUser.birthday, t)}
               </Info>
-              <Age>{getUserAge(currentUser.birthday)}</Age>
+              <Age>{getUserAge(currentUser.birthday, t)}</Age>
             </Dates>
             <Info>
               <PhoneIcon />

@@ -4,9 +4,7 @@ import { setTheme } from "../app/slices/userSlice";
 import { saveThemeToLS } from "../utils";
 
 const Toggle = styled.button`
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: relative;
   width: 40px;
   height: 24px;
   border-radius: 15px;

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -33,15 +34,16 @@ interface ErrorProps {
 }
 
 export const Error: FC<ErrorProps> = ({ refetch }) => {
+  const { t } = useTranslation();
   const retry = () => refetch();
 
   return (
     <Wrapper>
       <img src="src/assets/images/error.png" />
       <TextWrapper>
-        <BlackText>Какой-то сверхразум все сломал</BlackText>
-        <GrayText>Постараемся быстро починить</GrayText>
-        <RetryButton onClick={retry}>Попробовать снова</RetryButton>
+        <BlackText>{t("Какой-то сверхразум все сломал")}</BlackText>
+        <GrayText>{t("Постараемся быстро починить")}</GrayText>
+        <RetryButton onClick={retry}>{t("Попробовать снова")}</RetryButton>
       </TextWrapper>
     </Wrapper>
   );

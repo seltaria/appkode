@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { User } from "../types/User";
 import { useAppSelector } from "../app/hooks";
 import { formatDateToShow } from "../utils";
+import { useTranslation } from "react-i18next";
 
 const Wrapper = styled.div<{ $skeleton?: boolean }>`
   display: flex;
@@ -97,6 +98,8 @@ export const UserSkeleton = () => {
 };
 
 export const UserCard: FC<User> = (user) => {
+  const { t } = useTranslation();
+
   const { id, firstName, lastName, userTag, avatarUrl, department, birthday } =
     user;
 
@@ -115,10 +118,10 @@ export const UserCard: FC<User> = (user) => {
             </Name>
             <Tag>{userTag}</Tag>
           </NameWrapper>
-          <Department>{departments[department]}</Department>
+          <Department>{t(departments[department])}</Department>
         </Info>
         {isSortedByDay && (
-          <Birthday>{formatDateToShow(birthday, true)}</Birthday>
+          <Birthday>{formatDateToShow(birthday, t, true)}</Birthday>
         )}
       </Wrapper>
     </Link>

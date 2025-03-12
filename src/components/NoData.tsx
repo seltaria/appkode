@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -24,12 +25,14 @@ const GrayString = styled.div`
 `;
 
 export const NoData = () => {
+  const { t } = useTranslation();
+
   return (
     <Wrapper>
       <img src="src/assets/images/search_not_found.png" />
       <Text>
-        <BlackString>Мы никого не нашли</BlackString>
-        <GrayString>Попробуй скорректировать запрос</GrayString>
+        <BlackString>{t("Мы никого не нашли")}</BlackString>
+        <GrayString>{t("Попробуй скорректировать запрос")}</GrayString>
       </Text>
     </Wrapper>
   );
