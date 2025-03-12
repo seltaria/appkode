@@ -15,7 +15,7 @@ export const departments: Record<DepartmentsValue, DepartmentsLabel> = {
     [DepartmentsValue.ANALYTICS]: DepartmentsLabel.ANALYTICS,
 }
 
-export const TabFilters = { // TODO: rename
+export const tabFilters = {
     all: TabLabel.ALL,
     [DepartmentsValue.DESIGN]: TabLabel.DESIGN,
     [DepartmentsValue.ANALYTICS]: TabLabel.ANALYTICS,

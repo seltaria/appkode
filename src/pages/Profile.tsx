@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router";
 import { useGetUserListQuery } from "../app/userApi";
-import { BackIcon, Error, FavoriteIcon, PhoneIcon } from "../components";
+import { Error } from "../components";
+import { BackIcon, FavoriteIcon, PhoneIcon } from "../components/icons";
 import { NoData } from "../components/NoData";
 import styled from "styled-components";
 import { departments, TRANSITION_DURATION } from "../constants";

@@ -99,20 +99,20 @@ export const UserList: FC<UserListProps> = ({
 
   const today = formatDateToSort(new Date());
 
+  const currentYearBirthdays = sortedUsers
+    .filter((user) => formatDateToSort(user.birthday) > today)
+    .map((user) => <UserCard key={user.id} {...user} />);
+
+  const nextYearBirthdays = sortedUsers
+    .filter((user) => formatDateToSort(user.birthday) < today)
+    .map((user) => <UserCard key={user.id} {...user} />);
+
   const userElements =
     sortParam === "birthday" ? (
       <>
-        {sortedUsers
-          .filter((user) => formatDateToSort(user.birthday) > today)
-          .map((user) => (
-            <UserCard key={user.id} {...user} />
-          ))}
-        <Year>2026</Year>
-        {sortedUsers
-          .filter((user) => formatDateToSort(user.birthday) < today)
-          .map((user) => (
-            <UserCard key={user.id} {...user} />
-          ))}
+        {currentYearBirthdays}
+        {!!nextYearBirthdays.length && <Year>2026</Year>}
+        {nextYearBirthdays}
       </>
     ) : (
       <>

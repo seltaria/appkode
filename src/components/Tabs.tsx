@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction } from "react";
 import styled from "styled-components";
-import { TabFilters, TRANSITION_DURATION } from "../constants";
+import { tabFilters, TRANSITION_DURATION } from "../constants";
 import { useTranslation } from "react-i18next";
 
 const Wrapper = styled.div`
@@ -52,7 +52,7 @@ export const Tabs: FC<TabsProps> = ({ activeTab, setActiveTab }) => {
 
   return (
     <Wrapper>
-      {Object.entries(TabFilters).map(([value, label]) => (
+      {Object.entries(tabFilters).map(([value, label]) => (
         <Tab
           key={value}
           onClick={() => handleClick(value)}
