@@ -156,7 +156,12 @@ export const Profile = () => {
       {isSuccess && currentUser && (
         <>
           <Wrapper>
-            <Avatar src={currentUser.avatarUrl} alt={currentUser.userTag} />
+            {/* почти никогда не работает, с lorem.space точно всё в порядке? */}
+            {/* <Avatar src={currentUser.avatarUrl} alt={currentUser.userTag} /> */}
+            <Avatar
+              src="src/assets/images/goose.png"
+              alt={currentUser.userTag}
+            />
             <NameWrapper>
               <Name>
                 {currentUser.firstName} {currentUser.lastName}

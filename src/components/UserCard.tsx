@@ -100,8 +100,7 @@ export const UserSkeleton = () => {
 export const UserCard: FC<User> = (user) => {
   const { t } = useTranslation();
 
-  const { id, firstName, lastName, userTag, avatarUrl, department, birthday } =
-    user;
+  const { id, firstName, lastName, userTag, department, birthday } = user;
 
   const isSortedByDay = useAppSelector(
     (state) => state.users.sort === "birthday"
@@ -110,7 +109,9 @@ export const UserCard: FC<User> = (user) => {
   return (
     <Link to={`${id}`}>
       <Wrapper>
-        <Avatar as="img" src={avatarUrl} alt={userTag} />
+        {/* почти никогда не работает, с lorem.space точно всё в порядке? */}
+        {/* <Avatar as="img" src={avatarUrl} alt={userTag} /> */}
+        <Avatar as="img" src="src/assets/images/goose.png" alt={userTag} />
         <Info>
           <NameWrapper>
             <Name>
