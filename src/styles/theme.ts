@@ -9,6 +9,7 @@ export const lightTheme = {
     modalBg: "rgba(5, 5, 16, 0.161)",
     firstGradient: "#f3f3f6",
     secondGradient: "#fafafa",
+    red: "#F44336",
 }
 
 export const darkTheme = {
@@ -22,4 +23,5 @@ export const darkTheme = {
     modalBg: "rgba(255,255,255,0.2)",
     firstGradient: "#343434",
     secondGradient: "#343434",
+    red: "#983730",
 }

@@ -32,5 +32,7 @@
   "год": "year",
   "года": "years",
   "лет": "years",
-  "Сменить тему": "Change theme"
+  "Сменить тему": "Change theme",
+  "Не могу обновить данные. Проверь соединение с интернетом.": "Can't update data. Check your internet connection.",
+  "Секундочку, гружусь...": "Just a second, loading..."
 }

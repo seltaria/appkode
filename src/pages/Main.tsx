@@ -3,6 +3,7 @@ import { useGetUserListQuery } from "../app/userApi";
 import { Header, Search, Tabs, UserList } from "../components";
 import styled from "styled-components";
 import { useSearchParams } from "react-router";
+import { NetworkProblem } from "../components/NetworkProblem";
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,6 +40,7 @@ export const Main = () => {
           refetch={refetch}
         />
       </ContentWrapper>
+      <NetworkProblem refetch={refetch} isFetching={isFetching} />
     </Wrapper>
   );
 };
