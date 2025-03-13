@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `;
 
 export const App: FC<PropsWithChildren> = ({ children }) => {
-  const theme = useAppSelector((state) => state.users.theme);
+  const theme = useAppSelector((state) => state.theme.theme);
 
   return (
     <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>

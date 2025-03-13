@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { setTheme } from "../app/slices/userSlice";
+import { setTheme } from "../app/slices/themeSlice";
 import { saveThemeToLS } from "../utils";
 import { useTranslation } from "react-i18next";
 
@@ -28,7 +28,7 @@ const Circle = styled.div<{ $dark: boolean }>`
 
 export const ThemeSwitcher = () => {
   const dispatch = useAppDispatch();
-  const theme = useAppSelector((state) => state.users.theme);
+  const theme = useAppSelector((state) => state.theme.theme);
   const { t } = useTranslation();
 
   const toggleTheme = () => {

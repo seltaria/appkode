@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { userApi } from "./userApi";
-import { userSlice } from "./slices/userSlice";
+import { themeSlice } from "./slices/themeSlice";
 
 export const store = configureStore({
   reducer: {
     [userApi.reducerPath]: userApi.reducer,
-    [userSlice.reducerPath]: userSlice.reducer,
+    [themeSlice.reducerPath]: themeSlice.reducer,
   },
   middleware: 
     (getDefaultMiddleware) => 

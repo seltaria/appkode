@@ -3,7 +3,6 @@ import { UserCard, UserSkeleton } from "./UserCard";
 import { FC } from "react";
 import { User } from "../types/User";
 import { NoData } from "./NoData";
-import { useAppSelector } from "../app/hooks";
 import { Error } from "./Error";
 import { formatDateToSort } from "../utils";
 import { useSearchParams } from "react-router";
@@ -82,8 +81,7 @@ export const UserList: FC<UserListProps> = ({
   refetch,
 }) => {
   const [searchParams] = useSearchParams();
-  const sortParam =
-    useAppSelector((state) => state.users.sort) || searchParams.get("sort");
+  const sortParam = searchParams.get("sort") || "";
   const activeTab = searchParams.get("tab") || "all";
   const searchText = searchParams.get("search") || "";
 

@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useAppSelector, useDebounce } from "../app/hooks";
+import { useDebounce } from "../app/hooks";
 import { SearchIcon, SortIcon } from "./icons";
 import { SortModal } from "./SortModal";
 import { TRANSITION_DURATION } from "../constants";
@@ -87,8 +87,7 @@ export const Search = () => {
     }
   }, [debouncedInput, setSearchParams]);
 
-  const isFiltered =
-    useAppSelector((state) => !!state.users.sort) || !!searchParams.get("sort");
+  const isFiltered = !!searchParams.get("sort");
 
   const showSortModal = () => setIsSortModal(true);
   return (

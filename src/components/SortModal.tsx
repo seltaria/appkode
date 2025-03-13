@@ -1,8 +1,6 @@
 import { Dispatch, FC, SetStateAction, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import { sort } from "../app/slices/userSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { CloseIcon } from "./icons";
 import { TRANSITION_DURATION } from "../constants";
 import { useTranslation } from "react-i18next";
@@ -95,8 +93,6 @@ const sortParams = [
 export const SortModal: FC<SortModalProps> = ({ setIsSortModal }) => {
   const closeModal = useCallback(() => setIsSortModal(false), [setIsSortModal]);
 
-  const dispatch = useAppDispatch();
-
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -118,7 +114,6 @@ export const SortModal: FC<SortModalProps> = ({ setIsSortModal }) => {
   }
 
   const chooseSortParam = (param: string) => {
-    dispatch(sort(param));
     setSearchParams((params) => {
       if (params.get("sort") === param) {
         params.set("sort", "");
@@ -130,8 +125,7 @@ export const SortModal: FC<SortModalProps> = ({ setIsSortModal }) => {
     });
   };
 
-  const sortParam =
-    useAppSelector((state) => state.users.sort) || searchParams.get("sort");
+  const sortParam = searchParams.get("sort") || "";
 
   return createPortal(
     <Modal onClick={closeModal}>

@@ -1,9 +1,8 @@
 import { FC } from "react";
 import styled from "styled-components";
 import { departments, TRANSITION_DURATION } from "../constants";
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { User } from "../types/User";
-import { useAppSelector } from "../app/hooks";
 import { formatDateToShow } from "../utils";
 import { useTranslation } from "react-i18next";
 
@@ -99,12 +98,11 @@ export const UserSkeleton = () => {
 
 export const UserCard: FC<User> = (user) => {
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
 
   const { id, firstName, lastName, userTag, department, birthday } = user;
 
-  const isSortedByDay = useAppSelector(
-    (state) => state.users.sort === "birthday"
-  );
+  const isSortedByDay = searchParams.get("sort") === "birthday";
 
   return (
     <Link to={`${id}`}>
