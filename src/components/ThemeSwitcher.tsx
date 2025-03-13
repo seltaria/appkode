@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { setTheme } from "../app/slices/userSlice";
 import { saveThemeToLS } from "../utils";
+import { useTranslation } from "react-i18next";
 
 const Toggle = styled.button`
   position: relative;
@@ -28,6 +29,7 @@ const Circle = styled.div<{ $dark: boolean }>`
 export const ThemeSwitcher = () => {
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.users.theme);
+  const { t } = useTranslation();
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -36,7 +38,7 @@ export const ThemeSwitcher = () => {
   };
 
   return (
-    <Toggle onClick={toggleTheme}>
+    <Toggle onClick={toggleTheme} title={t("Сменить тему")}>
       <Circle $dark={theme === "dark"} />
     </Toggle>
   );

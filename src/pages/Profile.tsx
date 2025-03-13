@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   background-color: ${(props) => props.theme.input};
 `;
 
-const BackLink = styled.div`
+const BackButton = styled.button`
   position: absolute;
   top: 22px;
   left: 24px;
@@ -26,6 +26,7 @@ const BackLink = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
   transition: opacity ease-in-out ${TRANSITION_DURATION};
 
   &:hover {
@@ -140,9 +141,9 @@ export const Profile = () => {
 
   return (
     <>
-      <BackLink onClick={goBack}>
+      <BackButton onClick={goBack}>
         <BackIcon />
-      </BackLink>
+      </BackButton>
 
       {isLoading && <ProfileSkeleton />}
 

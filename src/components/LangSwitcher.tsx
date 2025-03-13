@@ -19,7 +19,7 @@ export const LangSwitcher = () => {
     i18n.changeLanguage(lang);
   };
 
-  const currentLanguage = i18n.language;
+  const currentLanguage = i18n.language.substring(0, 2);
 
   return (
     <div>

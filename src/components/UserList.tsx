@@ -43,7 +43,7 @@ const Year = styled.div`
 `;
 
 interface UserListProps {
-  users: User[] | undefined;
+  data: User[] | undefined;
   isLoading: boolean;
   isFetching: boolean;
   isError: boolean;
@@ -61,8 +61,20 @@ export const UserListSkeleton = () => {
   );
 };
 
+const searchUser = (userList: User[] | undefined, text: string): User[] => {
+  const formattedText = text.toLowerCase();
+
+  return (
+    userList?.filter((user) => {
+      const searchParams = `${user.firstName} ${user.lastName} ${user.userTag}`;
+
+      return searchParams.toLowerCase().indexOf(formattedText) !== -1;
+    }) || []
+  );
+};
+
 export const UserList: FC<UserListProps> = ({
-  users,
+  data,
   isLoading,
   isFetching,
   isError,
@@ -72,6 +84,8 @@ export const UserList: FC<UserListProps> = ({
   const [searchParams] = useSearchParams();
   const sortParam =
     useAppSelector((state) => state.users.sort) || searchParams.get("sort");
+  const activeTab = searchParams.get("tab") || "all";
+  const searchText = searchParams.get("search") || "";
 
   if (isLoading || isFetching) {
     return <UserListSkeleton />;
@@ -81,9 +95,16 @@ export const UserList: FC<UserListProps> = ({
     return <Error refetch={refetch} />;
   }
 
-  if ((isSuccess && !users?.length) || !Array.isArray(users)) {
+  if ((isSuccess && !data?.length) || !Array.isArray(data)) {
     return <NoData />;
   }
+
+  const users = searchUser(
+    data?.filter(
+      (user) => activeTab === "all" || user.department === activeTab
+    ),
+    searchText || ""
+  );
 
   const sortedUsers = [...users].sort((a, b) => {
     if (sortParam === "name") {

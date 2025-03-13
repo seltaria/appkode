@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, FC, SetStateAction, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAppSelector, useDebounce } from "../app/hooks";
 import { SearchIcon, SortIcon } from "./icons";
@@ -66,11 +66,7 @@ const SortButton = styled.button<{ $filtered?: boolean }>`
   }
 `;
 
-interface SearchProps {
-  setInputText: Dispatch<SetStateAction<string>>;
-}
-
-export const Search: FC<SearchProps> = ({ setInputText }) => {
+export const Search = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
   const [text, setText] = useState(searchParams.get("search") || "");
@@ -80,13 +76,16 @@ export const Search: FC<SearchProps> = ({ setInputText }) => {
     setText(event.target.value);
   };
 
-  useDebounce(() => {
-    setInputText(text);
-    setSearchParams((params) => {
-      params.set("search", text);
-      return params;
-    });
-  }, 300);
+  const debouncedInput = useDebounce(text, 500);
+
+  useEffect(() => {
+    if (typeof debouncedInput === "string") {
+      setSearchParams((params) => {
+        params.set("search", debouncedInput);
+        return params;
+      });
+    }
+  }, [debouncedInput, setSearchParams]);
 
   const isFiltered =
     useAppSelector((state) => !!state.users.sort) || !!searchParams.get("sort");
