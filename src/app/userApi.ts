@@ -3,6 +3,7 @@ import { User, UserListRequest } from "../types";
 
 export const userApi = createApi({
     reducerPath: "userApi",
+    keepUnusedDataFor: 300,
     baseQuery: fetchBaseQuery({ baseUrl: "https://stoplight.io/mocks/kode-frontend-team/koder-stoplight/86566464/users" }),
     endpoints: (builder) => ({
         getUserList: builder.query<User[], UserListRequest>({
