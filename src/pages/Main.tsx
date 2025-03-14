@@ -10,6 +10,10 @@ const Wrapper = styled.div`
   flex-direction: column;
   gap: 12px;
   padding: 16px;
+
+  @media (max-width: 500px) {
+    padding: 10px;
+  }
 `;
 
 const ContentWrapper = styled.div`

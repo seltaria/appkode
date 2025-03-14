@@ -34,6 +34,11 @@ const Avatar = styled.div<{ $skeleton?: boolean }>`
     props.$skeleton
       ? `linear-gradient(90deg, ${props.theme.firstGradient} 0%, ${props.theme.secondGradient} 100%)`
       : "none"};
+
+  @media (max-width: 500px) {
+    width: 50px;
+    height: 50px;
+  }
 `;
 
 const NameSkeleton = styled.div`
@@ -61,6 +66,10 @@ const NameWrapper = styled.div`
   display: flex;
   align-items: baseline;
   gap: 4px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
 `;
 
 const Tag = styled.div`

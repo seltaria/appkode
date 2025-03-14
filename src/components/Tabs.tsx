@@ -8,6 +8,10 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
 
+  @media (max-width: 500px) {
+    flex-wrap: wrap;
+  }
+
   &::before {
     content: "";
     position: absolute;

@@ -12,6 +12,10 @@ const StyledSearchIcon = styled.div`
   left: 12px;
   top: 8px;
 
+  @media (max-width: 500px) {
+    display: none;
+  }
+
   & path {
     transition: fill ease-in-out ${TRANSITION_DURATION};
   }
@@ -26,6 +30,11 @@ const Input = styled.input`
   color: ${(props) => props.theme.black};
   background-color: ${(props) => props.theme.input};
   caret-color: ${(props) => props.theme.accent};
+
+  @media (max-width: 500px) {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
 
   & svg path {
     fill: ${(props) => props.theme.black};

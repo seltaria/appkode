@@ -24,6 +24,10 @@ const Wrapper = styled.div`
   border-radius: 20px;
   color: ${(props) => props.theme.black};
   background-color: ${(props) => props.theme.white};
+
+  @media (max-width: 500px) {
+    width: 240px;
+  }
 `;
 
 const CloseButton = styled.button`

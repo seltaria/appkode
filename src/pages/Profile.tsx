@@ -32,6 +32,10 @@ const BackButton = styled.button`
   &:hover {
     opacity: 0.7;
   }
+
+  & path {
+    fill: ${(props) => props.theme.black};
+  }
 `;
 
 const Avatar = styled.img<{ $skeleton?: boolean }>`
@@ -44,6 +48,11 @@ const Avatar = styled.img<{ $skeleton?: boolean }>`
       ? `linear-gradient(90deg, ${props.theme.firstGradient} 0%, ${props.theme.secondGradient} 100%)`
       : "unset"};
   box-shadow: 0px 8px 12px 0px #161e3414;
+
+  @media (max-width: 500px) {
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 const Name = styled.h1`
@@ -100,6 +109,10 @@ const Info = styled.div`
   gap: 12px;
   padding: 24px 0;
   font-weight: 500;
+
+  & path {
+    fill: ${(props) => props.theme.black};
+  }
 `;
 
 const Dates = styled.div`
