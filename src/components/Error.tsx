@@ -39,7 +39,7 @@ export const Error: FC<ErrorProps> = ({ refetch }) => {
 
   return (
     <Wrapper>
-      <img src="src/assets/images/error.png" />
+      <img src="./error.png" alt="Error" />
       <TextWrapper>
         <BlackText>{t("Какой-то сверхразум все сломал")}</BlackText>
         <GrayText>{t("Постараемся быстро починить")}</GrayText>

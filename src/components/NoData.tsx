@@ -29,7 +29,7 @@ export const NoData = () => {
 
   return (
     <Wrapper>
-      <img src="src/assets/images/search_not_found.png" />
+      <img src="./search_not_found.png" alt="No data" />
       <Text>
         <BlackString>{t("Мы никого не нашли")}</BlackString>
         <GrayString>{t("Попробуй скорректировать запрос")}</GrayString>

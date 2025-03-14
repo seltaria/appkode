@@ -93,16 +93,16 @@ export const UserList: FC<UserListProps> = ({
     return <Error refetch={refetch} />;
   }
 
-  if ((isSuccess && !data?.length) || !Array.isArray(data)) {
-    return <NoData />;
-  }
-
   const users = searchUser(
-    data?.filter(
+    (Array.isArray(data) ? data : []).filter(
       (user) => activeTab === "all" || user.department === activeTab
     ),
     searchText || ""
   );
+
+  if ((isSuccess && !users?.length) || !Array.isArray(users)) {
+    return <NoData />;
+  }
 
   const sortedUsers = [...users].sort((a, b) => {
     if (sortParam === "name") {

@@ -109,7 +109,7 @@ export const UserCard: FC<User> = (user) => {
       <Wrapper>
         {/* почти никогда не работает, с lorem.space точно всё в порядке? */}
         {/* <Avatar as="img" src={avatarUrl} alt={userTag} /> */}
-        <Avatar as="img" src="src/assets/images/goose.png" alt={userTag} />
+        <Avatar as="img" src={"./goose.png"} alt={userTag} />
         <Info>
           <NameWrapper>
             <Name>
