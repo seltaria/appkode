@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { useDebounce } from "../app/hooks";
 import { SearchIcon, SortIcon } from "./icons";
 import { SortModal } from "./SortModal";
@@ -75,6 +75,12 @@ const SortButton = styled.button<{ $filtered?: boolean }>`
   }
 `;
 
+const GlobalStyle = createGlobalStyle<{ $isModalOpen: boolean }>`
+  html {
+    overflow: ${(props) => (props.$isModalOpen ? "hidden" : "unset")};
+  }
+`;
+
 export const Search = () => {
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -101,6 +107,7 @@ export const Search = () => {
   const showSortModal = () => setIsSortModal(true);
   return (
     <Wrapper>
+      <GlobalStyle $isModalOpen={isSortModal} />
       <Input
         onChange={handleChange}
         placeholder={t("Введи имя, фамилию или никнейм")}
