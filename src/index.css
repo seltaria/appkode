@@ -23,12 +23,14 @@ body {
   min-width: 300px;
   max-width: 1280px;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 button {
   background: none;
   border: none;
   cursor: pointer;
+  text-wrap: nowrap;
 }
 
 input {

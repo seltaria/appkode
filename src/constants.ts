@@ -22,6 +22,13 @@ export const tabFilters = {
     [DepartmentsValue.MANAGEMENT]: TabLabel.MANAGEMENT,
     [DepartmentsValue.IOS]: TabLabel.IOS,
     [DepartmentsValue.ANDROID]: TabLabel.ANDROID,
+    [DepartmentsValue.QA]: DepartmentsLabel.QA,
+    [DepartmentsValue.BACK_OFFICE]: DepartmentsLabel.BACK_OFFICE,
+    [DepartmentsValue.FRONTEND]: DepartmentsLabel.FRONTEND,
+    [DepartmentsValue.HR]: DepartmentsLabel.HR,
+    [DepartmentsValue.PR]: DepartmentsLabel.PR,
+    [DepartmentsValue.BACKEND]: DepartmentsLabel.BACKEND,
+    [DepartmentsValue.SUPPORT]: DepartmentsLabel.SUPPORT,
 }
 
 export const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];

@@ -7,6 +7,15 @@ const Wrapper = styled.div`
   align-items: center;
   gap: 8px;
   margin-top: 149px;
+
+  @media (max-width: 500px) {
+    margin-top: 40px;
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
 `;
 
 const Text = styled(Wrapper)`
